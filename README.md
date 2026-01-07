@@ -111,4 +111,36 @@ All behavior in `toc.js` is controlled via HTML data attributes.
     </nav>
   </div>
 </aside>
+```
 
+---
+
+
+# 🧩 srt-to-vtt-track.js
+
+Small helper that loads .srt subtitle files, converts them to WebVTT format, and injects them as <track> elements into HTML5 <video> tags.
+Designed as an infrastructure script. It does not depend on any video player implementation.
+
+## What it does
+
+- Finds all `<video>` elements with `data-subtitles-src`.
+- Fetches the SRT file from the given URL.
+- Converts SRT timestamps to valid WebVTT.
+- Creates a `<track kind="subtitles">` element.
+- Appends the track to the video.
+- Leaves subtitles disabled by default (mode = "hidden").
+- The browser then handles subtitles natively.
+
+Basic usage
+
+```html
+
+<video data-subtitles-src="/subs/en.srt" controls>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<script src="https://cdn.jsdelivr.net/gh/helenmadeit/webflow-scripts/srt-to-vtt-track.js"></script>
+```
+
+That’s it.
+After load, the video will have a subtitle track available in video.textTracks.
